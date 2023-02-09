@@ -18,7 +18,9 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse("<a href='/rango/'>Index</a>")
+    print(request.method)
+    print(request.user)
+    return render(request, 'rango/about.html', {})
 
 
 def show_category(request, category_name_slug):
@@ -41,7 +43,7 @@ def add_category(request):
         if form.is_valid():
             cat = form.save(commit=True)
             print(cat, cat.slug)
-            return redirect('/rango')
+            return redirect('/rango/')
         else:
             print(form.errors)
     return render(request, 'rango/add_category.html', {'form': form})
